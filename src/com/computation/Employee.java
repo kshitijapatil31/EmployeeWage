@@ -3,20 +3,27 @@ package com.computation;
 public class Employee {
 	public static final int IS_FULL_TIME=2;
 	public static final int IS_PART_TIME=1;
-	String companyName;
-	 int workingDays;
-	 int workingHrs;
-	 int empRate;
+	int noOfCompany=0;
+	EmployeeWageBuilder employee[];
 	
-	 public Employee(String companyName,int workingDays,int workingHrs,int empRate) {
-		this.companyName=companyName;
-		this.workingDays=workingDays;
-		this.workingHrs=workingHrs;
-		this.empRate=empRate;
+	public Employee() {
+		employee=new EmployeeWageBuilder[5];
 	}
-	public  void calculateWage() {
+	private void addEmployee(String companyName, int workingDays, int workingHrs, int empRate)  {
+		employee[noOfCompany]=new EmployeeWageBuilder(companyName,workingDays, workingHrs,empRate);
+		noOfCompany++;
+	}
+	
+	public void computeEmpWage() {
+		for(int i=0;i<noOfCompany;i++) {
+			employee[i].setTotalEmpWage(this.computeEmpWage(employee[i]));
+		System.out.println(employee[i]);
+		}
+	}
+	
+	public int computeEmpWage(EmployeeWageBuilder employeeWageBuilder) {
 		int empHrs=0,totalHrs=0,totalDays=0;
-		while(totalHrs<=workingHrs&&totalDays<workingDays) {
+		while(totalHrs<=employeeWageBuilder.workingHrs&&totalDays<employeeWageBuilder.workingDays) {
 			totalDays++;
 			int empCheck=(int)Math.floor(Math.random()*10)%3;
 			switch(empCheck)
@@ -32,25 +39,24 @@ public class Employee {
 			}
 			totalHrs=totalHrs+empHrs;
 		}
-		int totalWage=totalHrs*empRate;
-		System.out.println("Total Emp Wage"+ totalWage);
+	
+	
+	return totalHrs*employeeWageBuilder.empRate;
 	}
 	
 	
-	@Override
-	public String toString() {
-		return "Employee [companyName=" + companyName + ", workingDays=" + workingDays + ", workingHrs=" + workingHrs
-				+ ", empRate=" + empRate + "]";
-	}
+	
+	
 	public static void main(String[] args) {
 		
-		Employee tata=new Employee("TaTa",3,8,20);
-		Employee morningStar=new Employee("MorningStar",3,8,20);
+		Employee tata=new Employee();
+		
 
-		tata.calculateWage();
+		tata.addEmployee("MorningStar",3,8,20);
+		tata.addEmployee("cdacMumbai",4,4,30);
 		System.out.println(tata);
-		morningStar.calculateWage();
-		System.out.println(morningStar);
+	
+		tata.computeEmpWage();
 	}
 
 }
