@@ -1,6 +1,14 @@
 package com.computation;
-
-public class Employee {
+interface EmployeeBuilder{
+	
+	abstract void addEmployee(String companyName, int workingDays, int workingHrs, int empRate);
+	
+	public void computeEmpWage() ;
+}
+public class Employee implements EmployeeBuilder {
+	
+	
+	
 	public static final int IS_FULL_TIME=2;
 	public static final int IS_PART_TIME=1;
 	int noOfCompany=0;
@@ -9,7 +17,7 @@ public class Employee {
 	public Employee() {
 		employee=new EmployeeWageBuilder[5];
 	}
-	private void addEmployee(String companyName, int workingDays, int workingHrs, int empRate)  {
+	public void addEmployee(String companyName, int workingDays, int workingHrs, int empRate)  {
 		employee[noOfCompany]=new EmployeeWageBuilder(companyName,workingDays, workingHrs,empRate);
 		noOfCompany++;
 	}
