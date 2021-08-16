@@ -7,7 +7,8 @@ public class Employee {
 	 int workingDays;
 	 int workingHrs;
 	 int empRate;
-	public Employee(String companyName,int workingDays,int workingHrs,int empRate) {
+	
+	 public Employee(String companyName,int workingDays,int workingHrs,int empRate) {
 		this.companyName=companyName;
 		this.workingDays=workingDays;
 		this.workingHrs=workingHrs;
@@ -36,10 +37,20 @@ public class Employee {
 	}
 	
 	
+	@Override
+	public String toString() {
+		return "Employee [companyName=" + companyName + ", workingDays=" + workingDays + ", workingHrs=" + workingHrs
+				+ ", empRate=" + empRate + "]";
+	}
 	public static void main(String[] args) {
 		
-		Employee employee=new Employee("TaTa",3,8,20);
-		employee.calculateWage();
+		Employee tata=new Employee("TaTa",3,8,20);
+		Employee morningStar=new Employee("MorningStar",3,8,20);
+
+		tata.calculateWage();
+		System.out.println(tata);
+		morningStar.calculateWage();
+		System.out.println(morningStar);
 	}
 
 }
